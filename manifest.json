@@ -1,0 +1,20 @@
+{
+    "manifest_version": 2,
+    "name": "MyExtension",
+    "version": "1.0.0",
+    "browser_action": {
+        "default_popup": "dist/app.html"
+    },
+    "background": {
+        "persistent": true,
+        "scripts": [
+            "env.js", "dist/background.js"
+        ]
+    },
+    "permissions": [
+        "storage",
+        "tabs",
+        "identity",
+        "https://api.ecobee.com/"
+    ]
+}
