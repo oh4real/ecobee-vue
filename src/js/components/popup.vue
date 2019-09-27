@@ -9,7 +9,7 @@
                 <button @click="viewDetails(stat)" class="button manage">manage</button>
             </li>
         </ul>
-        <button @click="openEcobee()" class="button">Open Ecobee</button>
+        <button @click="openEcobee()" class="button" v-show="error">Go to Ecobee</button>
     </div>
 </template>
 <script>
@@ -80,6 +80,7 @@
         border: 0;
         box-shadow: 0 1px 2px gray;
         &.manage {
+            margin-left: 2em;
             background:rgb(91, 189, 118);
             color: white;
         }

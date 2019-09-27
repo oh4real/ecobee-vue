@@ -33,6 +33,7 @@ function getStatus() {
 
 function refreshToken() {
     if (Storage.hasRefreshToken()) {
+        console.log('core.refreshToken()');
         Client.refreshToken()
             .then(() => {
                 console.log("refreshToken: post.success()");

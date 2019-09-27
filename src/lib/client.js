@@ -53,10 +53,12 @@ export default {
             }.bind(this)
         );
     },
-    refreshToken: function() {
+    refreshToken: function () {
+        console.log('client.refreshToken()');
         // try to get new access token with refresh_token
         return axios.post(this.getRefreshTokenUrl(Storage.getRefreshToken()))
             .then(function (data) {
+                console.log('client.refreshToken(): 1st then');
                 Storage.store(data.data);
                 return data;
             });
