@@ -1,8 +1,7 @@
-import axios from 'axios';
 import Storage from './storage';
 import { getClientInterval } from './config';
 import Client from './client';
-import {heatCoolFilter, loadBadge} from './utils';
+import { loadBadge } from './utils';
 
 var timerId;
 
@@ -23,6 +22,10 @@ function getStatus() {
         Client.getThermostatData()
             .then((data) => {
                 loadBadge(data);
+            })
+            .catch((err) => {
+                console.log('Invalid access_token in core.getStatus()');
+                throw err;
             })
             .catch(refreshToken);
     } else {
