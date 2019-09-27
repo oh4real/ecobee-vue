@@ -19,8 +19,12 @@
         data() {
             return {
                 stats: [],
-                loaded: false,
                 error: false
+            }
+        },
+        computed: {
+            loaded: function() { 
+                return this.stats.length;
             }
         },
         mounted() {
@@ -28,7 +32,6 @@
                 .then((thermostats) => {
                     console.log(thermostats);
                     this.stats = thermostats;
-                    this.loaded = true;
                 })
                 .catch((err) => {
                     this.error = true;
