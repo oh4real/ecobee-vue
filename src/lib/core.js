@@ -7,6 +7,7 @@ function getExtensionId() {
     return chrome.runtime.id;
 }
 function getClient() {
+    console.log(APP_KEYS, getExtensionId());
     return APP_KEYS[getExtensionId()];
 }
 function getAuthUrl() {
@@ -43,12 +44,15 @@ function stopRequest() {
 function getStatus(callback) {
     console.log('this is here');
     var callback = callback != undefined ? callback : loadBadge;
-    if (localStorage.hasOwnProperty(TOKEN_NAMESPACE)) {
-        var tokenData = JSON.parse(localStorage.getItem(TOKEN_NAMESPACE));
+    if (localStorage.hasOwnProperty(getExtensionId())) {
+        var tokenData = JSON.parse(localStorage.getItem(getExtensionId()));
 		/**
 			Content-Type: application/json;charset=UTF-8
 			Authorization: Bearer 9BwUG2zsmtjoxW83uUHg10YySwhiEow7
-		*/
+        */
+        /**
+         * https: //api.ecobee.com/1/thermostatSummary?json={"selection":{"includeAlerts":"true","selectionType":"registered","selectionMatch":"","includeEvents":"true","includeSettings":"true","includeRuntime":"true"}}
+         */
         var headers = { 'Content-Type': 'application/json;charset=UTF-8', 'Authorization': 'Bearer ' + tokenData.access_token };
         console.log(headers);
         var u = new URL('/1/thermostat', 'https://api.ecobee.com');
@@ -81,13 +85,13 @@ function loadBadge(resp) {
 }
 
 function refreshToken() {
-    var tokenData = JSON.parse(localStorage.getItem(TOKEN_NAMESPACE));
+    var tokenData = JSON.parse(localStorage.getItem(getExtensionId()));
     if (tokenData.refresh_token.length) {
         // try to get new access token with refresh_token
         axios.post('https://api.ecobee.com/token?grant_type=refresh_token&client_id=' + getClient().id + '&refresh_token=' + tokenData.refresh_token)
             .then(function (data) {
                 console.log("refreshToken: post.success()");
-                localStorage.setItem(TOKEN_NAMESPACE, JSON.stringify(data));
+                localStorage.setItem(getExtensionId(), JSON.stringify(data));
                 getStatus();
             })
             .catch(function (data) {
@@ -112,7 +116,7 @@ function authorizeUser() {
                 axios.post(getInitialTokenUrl(code))
                     .then(function (data) {
                         console.log("authorizeUser: post.success()");
-                        localStorage.setItem(TOKEN_NAMESPACE, JSON.stringify(data.data));
+                        localStorage.setItem(getExtensionId(), JSON.stringify(data.data));
                         startRequest();
                     })
                     .catch(function (data) {

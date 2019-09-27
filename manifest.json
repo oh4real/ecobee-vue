@@ -1,5 +1,6 @@
 {
     "manifest_version": 2,
+    "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA5n72o6rJ8djPatYtDSzycfd3wLswIzhTwg8wpAYwyR8ZG74PjShWeTfqr0wAl3R7TnTzr6zN8c2jqnZMsd4qwtG6kX2uQyXhEhqrAU2z1Nh+NaPjPNhH7i2kA5/a2oU1+Hd+qWcnn6UDZwbCPWJvvJa92MoB/VfVDso/ddKMzvWjG9aOqq4zNz5m+65VBkXpmkOJtLNoO7WN83rZs7hQKFE2GbWnqdtD3QIsf12T1IXGyPlEKW/jX1UMrVYbkngDP3lbJIMx2YdR5k/QYYYUVgL4uSYNx8qcaQrCo7t0gfqBcVfhq6UsWDT6N8njL4q5mHpJqW24c6wd8yEEUp+NiQIDAQAB",
     "name": "MyExtension",
     "version": "1.0.0",
     "browser_action": {
@@ -8,7 +9,7 @@
     "background": {
         "persistent": true,
         "scripts": [
-            "env.js", "dist/background.js"
+            "dist/js/env.js", "dist/js/background.js"
         ]
     },
     "permissions": [
