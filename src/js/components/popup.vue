@@ -22,11 +22,6 @@
                 error: false
             }
         },
-        computed: {
-            loaded: function() { 
-                return this.stats.length;
-            }
-        },
         mounted() {
             Client.getThermostatData()
                 .then((thermostats) => {
@@ -37,6 +32,11 @@
                     this.error = true;
                     console.log('Auth failure', err);
                 })
+        },
+        computed: {
+            loaded: function() { 
+                return this.stats.length;
+            }
         },
         methods: {
             viewAtEcobee(stat) {
