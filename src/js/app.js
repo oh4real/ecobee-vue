@@ -1,5 +1,5 @@
 import Vue from 'vue';
-import App from './components/app.vue'
+import App from './components/popup.vue'
 
 new Vue({
     el: '#my-app',
