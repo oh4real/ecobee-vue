@@ -1,11 +1,12 @@
 <template>
     <div>
         <ul class="tab-list" >
+            <li class="tab-item bold">Your Devices</li>
             <li class="tab-item" v-show="!error && !loaded">Loading...</li>
             <li class="tab-item" v-show="error">There was an error loading. Please try again later.</li>
             <li class="tab-item" v-for="stat in stats" v-bind:key="stat.id">
-                {{ stat.name }}: <span class="temp" :class="findClassByStatus(stat)">{{ getTemp(stat) }}</span>
-                <button @click="viewAtEcobee(stat)" class="button manage">manage</button>
+                {{ stat.name }}: <span class="bold" :class="findClassByStatus(stat)">{{ getTemp(stat) }}</span>
+                <button @click="viewDetails(stat)" class="button manage">manage</button>
             </li>
         </ul>
         <button @click="openEcobee()" class="button">Open Ecobee</button>
@@ -39,7 +40,7 @@
             }
         },
         methods: {
-            viewAtEcobee(stat) {
+            viewDetails(stat) {
                 var url = "https://www.ecobee.com/consumerportal/index.html#/devices/thermostats/" + stat.identifier;
                 chrome.tabs.create({ url: url })
             },
@@ -59,7 +60,7 @@
 </script>
 <style lang="scss">
     * { box-sizing: border-box; }
-    body { min-width: 300px; font-family: sans-serif; padding: 1em; }
+    body { min-width: 250px; font-family: sans-serif; padding: 1em; }
     .tab-list {
         list-style: none;
         margin: 0 0 1em 0;
@@ -89,7 +90,7 @@
     .heat {
         color: #f71;
     }
-    .temp {
+    .bold {
         font-weight: bold;
     }
 </style>
