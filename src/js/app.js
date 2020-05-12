@@ -1,12 +1,12 @@
 import Vue from 'vue';
-import App from './components/app.vue'
+import Popup from './components/popup.vue'
 
 new Vue({
-    el: '#my-app',
+    el: '#ecobee-vue',
     components: {
-        App
+        Popup
     },
     render(h) {
-        return h('app');
+        return h('popup');
     }
 });
